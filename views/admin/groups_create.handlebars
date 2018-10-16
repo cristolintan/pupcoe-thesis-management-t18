@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Add Group</h1>
+</div>
+<div>
+<div class='row'>
+  <div class='col-md-8'>
+
+        <form class="needs-validation" novalidate="" action="/admin/groups-create" method="POST">
+
+            <div class="mb-3">
+              <label for="batch">Thesis Tile</label>
+              <input type="text" id="name" name="name" class="form-control">
+            </div>
+
+            <hr class="mb-4">
+            <h4>Adviser</h4>
+
+            <div class="mb-3">
+              <select id="adviser" name="adviser" class="form-control">
+                {{#each faculties}}
+                  <option value="{{this.id}}">{{this.first_name}} {{this.last_name}}</option>
+                {{/each}}
+              </select>
+            </div>
+
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
+          </form>
+   </div>
+</div>
+
+
+</div>
