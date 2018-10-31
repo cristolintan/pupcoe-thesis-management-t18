@@ -53,7 +53,7 @@ CREATE TABLE "group_members" (
 );
 
 CREATE TABLE "proposal" (
-  "id" SERIAL PRIMARY KEY,
+  "proposal_id" SERIAL PRIMARY KEY,
   "title" VARCHAR(50) NOT NULL,
   "timestamp" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 );
