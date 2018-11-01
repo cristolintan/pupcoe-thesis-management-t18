@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Submitted Proposal</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group mr-2">
+      <a href="/student/proposal-create" class="btn btn-sm btn-outline-secondary">Submit Proposal</a>
+    </div>
+    <div class="btn-group mr-2">
+      <a href="/student/proposal-status" class="btn btn-sm btn-outline-secondary">Proposal Status</a>
+    </div>
+  </div>
+</div>
+<div>
+  <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">TITLE</th>
+      <th scope="col">TIMESTAMP</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each proposal}}
+    <tr>
+      <th scope="row">{{this.proposal_id}}</th>
+      <td>{{this.title}}</td>
+      <td>{{this.timestamp}}</td>
+      <td><a href='/student/proposal/{{this.id}}'>view document</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>

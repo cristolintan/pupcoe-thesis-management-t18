@@ -51,3 +51,16 @@ CREATE TABLE "group_members" (
   "group_id" INT REFERENCES groups(id),
   "members_id" INT REFERENCES users(id)
 );
+
+CREATE TABLE "proposal" (
+  "id" SERIAL PRIMARY KEY,
+  "title" VARCHAR(50) NOT NULL,
+  "timestamp" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+);
+
+CREATE TABLE "proposalStatus" (
+  "id" SERIAL PRIMARY KEY,
+  "status" boolean default 'f' NOT NULL,
+  "proposal_id" INT REFERENCES proposal(id),
+  "faculty_id" INT REFERENCES users(id)
+  );

@@ -41,7 +41,7 @@ var Groups = {
       INNER JOIN users us on cl.adviser = us.id
       WHERE c.members_id = ${studentId}
     `;
-    var promise = new Promise((resolve, reject) => {
+    var promise = new Promise((resolve, reject) => {  
       db.query(query, (req, data) => {
         console.log('getByStudentId', data.rows);
         if (data && data.rowCount) {
@@ -53,7 +53,8 @@ var Groups = {
     });
     return promise;
   },
-  getStudentsByClassId: (groupId) => {
+  
+  getStudentsByGroupId: (groupId) => {
     const query = `
       SELECT *
       FROM "group_members" c
@@ -71,14 +72,32 @@ var Groups = {
     });
     return promise;
   },
-
-  getMembersByStudentId: (studentId) => {
+   
+   getStudentsByClassId: (classId) => {
+    const query = `
+      SELECT *
+      FROM "group_members" c
+      INNER JOIN users u on c.members_id = u.id
+      WHERE c.group_id = ${classId}
+    `;
+    var promise = new Promise((resolve, reject) => {
+      db.query(query, (req, data) => {
+        if (data && data.rowCount) {
+          resolve(data.rows);
+        } else {
+          resolve([]);
+        }
+      });
+    });
+    return promise;
+  },
+  getMembersByStudentId: (membersStudentId) => {
     const query = `
       SELECT *
       FROM "group_members" c
       INNER JOIN users u on c.members_id = u.id
       INNER JOIN groups g on c.group_id = g.id
-      WHERE c.group_id = (SELECT group_id from group_members WHERE members_id = ${studentId})
+      WHERE c.group_id = (SELECT group_id from group_members WHERE members_id = ${membersStudentId})
     `;
     var promise = new Promise((resolve, reject) => {
       db.query(query, (req, data) => {

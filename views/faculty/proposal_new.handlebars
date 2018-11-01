@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">New Proposal</h1>
+</div>
+<div>
+  <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">TITLE</th>
+      <th scope="col">TIMESTAMP</th>
+      <th scope="col">APPROVED</th>
+      <th scope="col">DISAPPROVED</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+ 
+  <tbody>
+    {{#each proposal}}
+    <tr>
+      <th scope="row">{{this.proposal_id}}</th>
+      <td>{{this.title}}</td>
+      <td>{{this.timestamp}}</td>
+      <td><a href="/api/proposal/{{this.proposal_id}}"><button type="button" class="btn btn-primary">Approved</button></a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>

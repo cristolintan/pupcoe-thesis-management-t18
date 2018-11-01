@@ -19,6 +19,7 @@ $( document ).ready(function() {
     })
   })
 
+//add members to group
 $('#save-group-students').click(function() {
     var  group_id = $('#student-list').data('group-id');
     var selectedStudents = $('#student-list').val()
@@ -34,5 +35,6 @@ $('#save-group-students').click(function() {
       window.location.reload();
     })
   })
+
 
 });

@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Submitted Proposal</h1>
+</div>
+<div>
+  <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">TITLE</th>
+      <th scope="col">TIMESTAMP</th>
+      <th scope="col">APPROVED COUNT</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each approved}}
+    <tr>
+      <th scope="row">{{this.proposal_id}}</th>
+      <td>{{this.title}}</td>
+      <td>{{this.timestamp}}</td>
+      <td>{{this.count}}</td>
+      <td>{{this.disapproved}}</td>
+      <td><a href='/student/proposal/{{this.id}}'>view document</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>

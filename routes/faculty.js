@@ -3,6 +3,7 @@ var router = express.Router();
 const User = require('./../models/user');
 const Class = require('./../models/class');
 const Groups = require('./../models/groups');
+const Proposal = require('./../models/proposal');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,9 +29,7 @@ router.get('/classes', function(req, res, next) {
 
 router.get('/class/:classId', function(req, res, next) {
   if (req.isAuthenticated() && req.user.user_type == 'faculty') {
-    Class.getById(req.params.classId)
-      .then((classData) => {
-        console.log('class', classData)
+    Class.getById(req.params.classId).then((classData) => {
         Class.getStudentsByClassId(req.params.classId).then((classStudents)=> {
           res.render('faculty/class_detail', { layout: 'faculty', classData: classData, classStudents: classStudents });
         })
@@ -59,10 +58,32 @@ router.get('/groups/:groupId', function(req, res, next) {
         User.noGroupList('student')
           .then((allStudents) => {
             Groups.getStudentsByClassId(req.params.groupId).then((groupStudents)=> {
-              res.render('faculty/group_detail', { layout: 'faculty', groupData: groupData, allStudents: allStudents, groupStudents: groupStudents });
+              res.render('faculty/group_details', { layout: 'faculty', groupData: groupData, allStudents: allStudents, groupStudents: groupStudents });
             })
           })
       })
+  } else {
+    res.redirect('/')
+  }
+});
+
+router.get('/proposal', function(req, res, next) {
+  if (req.isAuthenticated() && req.user.user_type == 'faculty') {
+    Proposal.countApproved().then((proposal) =>{
+    res.render('faculty/proposal' ,{ layout: 'faculty',  proposal: proposal });
+    })
+
+  } else {
+    res.redirect('/')
+  }
+});
+
+router.get('/proposal_new', function(req, res, next) {
+  if (req.isAuthenticated() && req.user.user_type == 'faculty') {
+    Proposal.notApprovedList(req.user.id).then((proposal) =>{
+    res.render('faculty/proposal_new' ,{ layout: 'faculty',  proposal: proposal });
+    })
+
   } else {
     res.redirect('/')
   }
